@@ -1,0 +1,161 @@
+/* styles.css */
+/*
+COLOURS !!!
+black header: 001114
+pink header: e0508e
+green header: 7adc248a
+*/
+body {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.045)08e;
+}
+
+
+header {
+    background-color: #001114; 
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+    width: fit-content;
+}
+
+img {
+    width: 130px;
+    height: auto;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+
+.button-banner {
+    background-color: #001114e5; 
+    text-align: center;
+    white-space: nowrap;
+    height: 5%;
+}
+
+.button-banner ul {
+    padding: 0;
+    margin: 0;
+}
+
+.button-banner ul li {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 15%;
+    border-right: 2px solid #ffffff3f;
+    padding:15px;
+}
+
+.button-banner ul li a {
+    white-space: wrap;
+    display: inline-block;
+    padding:2.3em;
+    margin:-2.6em;
+    color: #ffffffc1;
+    text-decoration: none; 
+}
+
+
+.button-banner ul li:hover {
+    background-color: #001114;
+    color: #ffffff;
+    box-shadow: -5px 0px #001114;
+}
+
+.button-banner ul li a:hover {
+    color: #ffffff;
+}
+
+.button-banner ul li:last-child {
+    border-right: none; 
+}
+
+.header-container { 
+    background-color: #e0508e;
+}
+
+h2 { 
+    color: #ffffff;
+    text-align: left;
+    margin: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+p { 
+    margin-left: 30px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+
+.download-buttons {
+    text-align: center;
+}
+
+.download-buttons ul {
+    padding: 0;
+    margin: 0;
+}
+
+.download-buttons ul li {
+    display: inline-block;
+}
+
+.download-buttons ul li a {
+    padding: 10px 20px;
+    background-color: #e0508e96;
+    color: #000;
+    margin: 0 50px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.file-download-buttons { 
+    text-align: center;
+    
+}
+.file-download-buttons a { 
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e0508e96;
+    color: #000;
+    border-radius: 5px;
+}
+
+
+.pdf-viewer {
+    text-align: center;
+    vertical-align: center;
+    margin-bottom: 50px;
+}
+
+.gantt-charts { 
+    width: 75%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.captions { 
+    color:#00000089;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 80px;
+}
+
+
+.repo-link p { 
+    display: inline;
+    margin-left: 30px
+}
+
+.repo-link a { 
+    display: inline;
+}

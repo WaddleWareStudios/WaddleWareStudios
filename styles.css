@@ -12,12 +12,21 @@ body {
     background: rgba(255, 255, 255, 0.045)08e;
 }
 
-
 header {
-    background-color: #001114; 
+    background-color: #001114;
     color: #fff;
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.title-and-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 h1 {
