@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScoreTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tests</a> &gt; <a href="index.source.html" class="el_package">io.HeslingtonHustle.tests</a> &gt; <span class="el_source">ScoreTest.java</span></div><h1>ScoreTest.java</h1><pre class="source lang-java linenums">package io.HeslingtonHustle.tests;
+
+import static org.junit.Assert.*;
+
+import com.main.utils.Score;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.List;
+
+/**
+ * Tests the Score class
+ */
+<span class="fc" id="L14">public class ScoreTest {</span>
+
+    private Score score;
+
+    /**
+     * Initialises Score
+     */
+    @Before
+    public void initialise() {
+<span class="fc" id="L23">        score = new Score();</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * Tests if the initial score is 0
+     */
+    @Test
+    public void testInitialScore() {
+<span class="fc" id="L31">        assertEquals(0, score.getScore());</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Tests study hours and locations are successfully recorded ready for score calculation
+     */
+    @Test
+    public void testStudy() {
+<span class="fc" id="L39">        score.study(3, &quot;Comp_sci_door&quot;);</span>
+<span class="fc" id="L40">        assertEquals(3, score.getStudyCount());</span>
+
+<span class="fc" id="L42">        String[] studLocations =  score.getStudyLocations().toArray(new String[0]);</span>
+<span class="fc" id="L43">        assertEquals(&quot;Comp_sci_door&quot;, studLocations[0]);</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * Tests eating hours and count are successfully recorded ready for score calculation
+     */
+    @Test
+    public void testEat() {
+<span class="fc" id="L51">        score.eat(12); // Eat at 12pm</span>
+<span class="fc" id="L52">        assertEquals(1, score.getMealCount());</span>
+
+<span class="fc" id="L54">        List&lt;Integer&gt; mealTimes = score.getMealTimes();</span>
+<span class="fc" id="L55">        assertEquals((Integer) 12, mealTimes.get(0));</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * Tests recreational activity hours and locations are successfully recorded ready for score calculation.
+     */
+    @Test
+    public void testDoRecActivity() {
+<span class="fc" id="L63">        score.doRecActivity(3, &quot;Feed the Ducks&quot;);</span>
+<span class="fc" id="L64">        assertEquals(3, score.getRecreationCount());</span>
+
+<span class="fc" id="L66">        String[] recLocations =  score.getRecreationLocations().toArray(new String[0]);</span>
+<span class="fc" id="L67">        assertEquals(&quot;Feed the Ducks&quot;, recLocations[0]);</span>
+<span class="fc" id="L68">    }</span>
+
+    /**
+     * Tests a calculating score based on various activities.
+     */
+    @Test
+    public void testCalculateScore() {
+<span class="fc" id="L75">        score.study(4, &quot;Comp_sci_door&quot;);</span>
+<span class="fc" id="L76">        score.eat(12);</span>
+<span class="fc" id="L77">        score.doRecActivity(2, &quot;Feed the Ducks&quot;);</span>
+
+<span class="fc" id="L79">        assertEquals(31, score.calculateScore());</span>
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * Tests resetting daily counters.
+     */
+    @Test
+    public void testResetDailyCounters() {
+<span class="fc" id="L87">        score.study(3, &quot;Comp_sci_door&quot;);</span>
+<span class="fc" id="L88">        score.eat(12);</span>
+<span class="fc" id="L89">        score.doRecActivity(4, &quot;Feed the Ducks&quot;);</span>
+
+<span class="fc" id="L91">        score.resetDailyCounters();</span>
+
+<span class="fc" id="L93">        assertEquals(0, score.getStudyCount());</span>
+<span class="fc" id="L94">        assertEquals(0, score.getMealCount());</span>
+<span class="fc" id="L95">        assertEquals(0, score.getRecreationCount());</span>
+<span class="fc" id="L96">        assertFalse(score.hasMissedStudy());</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * Tests multiple activities locations and counts are successfully recorded.
+     */
+    @Test
+    public void testMultipleActivities() {
+<span class="fc" id="L104">        score.study(3, &quot;Comp_sci_door&quot;);</span>
+<span class="fc" id="L105">        score.eat(12);</span>
+<span class="fc" id="L106">        score.doRecActivity(1, &quot;Feed the Ducks&quot;);</span>
+
+<span class="fc" id="L108">        assertEquals(3, score.getStudyCount());</span>
+<span class="fc" id="L109">        assertEquals(1, score.getMealCount());</span>
+<span class="fc" id="L110">        assertEquals(1, score.getRecreationCount());</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Test correct score is calculated after a full game run through
+     */
+    @Test
+    public void testFUllGameScore() {
+<span class="fc" id="L118">        int total_score = 0;</span>
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (int day = 0; day &lt; 7; day++) {</span>
+<span class="fc" id="L121">            score.study(3, &quot;Comp_sci_door&quot;);</span>
+<span class="fc" id="L122">            score.study(1, &quot;Piazza&quot;);</span>
+<span class="fc" id="L123">            score.doRecActivity(2, &quot;Feed the Ducks&quot;);</span>
+<span class="fc" id="L124">            score.doRecActivity(3, &quot;Gym_door&quot;);</span>
+<span class="fc" id="L125">            score.eat(9);</span>
+<span class="fc" id="L126">            score.eat(1);</span>
+<span class="fc" id="L127">            score.eat(6);</span>
+<span class="fc" id="L128">            score.incrementSleep();</span>
+
+<span class="fc" id="L130">            total_score += score.calculateScore();</span>
+<span class="fc" id="L131">            score.resetDailyCounters();</span>
+        }
+
+<span class="fc" id="L134">        total_score += score.checkStreaks();</span>
+
+<span class="fc" id="L136">        assertEquals(440, total_score);</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Test score is set to 0 after player fails to study for 2 days
+     */
+    @Test
+    public void testFailedGameScore() {
+<span class="fc" id="L144">        int total_score = 0;</span>
+<span class="fc" id="L145">        boolean hasFailed = false;</span>
+
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        for (int day = 0; day &lt; 7; day++) {</span>
+<span class="fc bfc" id="L148" title="All 4 branches covered.">            if (day != 2 &amp;&amp; day != 4) {</span>
+<span class="fc" id="L149">                score.study(3, &quot;Piazza_door&quot;);</span>
+            }
+<span class="fc bfc" id="L151" title="All 2 branches covered.">            if (score.hasMissedStudy()) { //check if player has already missed study for a day</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">                if (score.getStudyCount() == 0) { //check if the player hasn't studied today</span>
+<span class="fc" id="L153">                    hasFailed = true;</span>
+                }
+            }
+
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            if (!hasFailed) {</span>
+<span class="fc" id="L158">                total_score += score.calculateScore();</span>
+            }
+            else {
+<span class="fc" id="L161">                total_score = 0;</span>
+            }
+<span class="fc" id="L163">            score.resetDailyCounters();</span>
+        }
+
+<span class="fc" id="L166">        total_score += score.checkStreaks();</span>
+        
+<span class="fc" id="L168">        assertEquals(0, total_score);</span>
+<span class="fc" id="L169">        assertTrue(hasFailed);</span>
+<span class="fc" id="L170">    }</span>
+
+
+    /**
+     * Tests that the streaks are correctly awarded
+     */
+    @Test
+    public void testStreaks() {
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        for(int day = 0; day &lt; 7; day++) {</span>
+<span class="fc" id="L179">            score.study(1, &quot;Comp_sci_door&quot;);</span>
+<span class="fc" id="L180">            score.study(1, &quot;Piazza&quot;);</span>
+<span class="fc" id="L181">            score.doRecActivity(1, &quot;Feed_ducks&quot;);</span>
+<span class="fc" id="L182">            score.doRecActivity(1, &quot;Gym_door&quot;);</span>
+<span class="fc" id="L183">            score.doRecActivity(1, &quot;Visit_city&quot;);</span>
+<span class="fc" id="L184">            score.doRecActivity(1, &quot;Ron_cooke_door&quot;);</span>
+<span class="fc" id="L185">            score.incrementSleep();</span>
+<span class="fc" id="L186">            score.resetDailyCounters();</span>
+        }
+<span class="fc" id="L188">        score.checkStreaks();</span>
+
+<span class="fc" id="L190">        assertEquals(&quot;WaddleWare Representative\n&quot; +</span>
+                        &quot;Programmer\n&quot; +
+                        &quot;Athlete\n&quot; +
+                        &quot;Early Nights\n&quot; +
+                        &quot;All Rounder\n&quot; +
+                        &quot;Daily Routine\n&quot;,
+<span class="fc" id="L196">                score.getStreaks());</span>
+
+<span class="fc" id="L198">        assertEquals( 50, score.checkStreaks());</span>
+<span class="fc" id="L199">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

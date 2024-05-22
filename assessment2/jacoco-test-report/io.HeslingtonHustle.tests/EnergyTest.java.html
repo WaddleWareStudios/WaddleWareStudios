@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EnergyTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tests</a> &gt; <a href="index.source.html" class="el_package">io.HeslingtonHustle.tests</a> &gt; <span class="el_source">EnergyTest.java</span></div><h1>EnergyTest.java</h1><pre class="source lang-java linenums">package io.HeslingtonHustle.tests;
+
+import com.main.utils.Energy;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ * Tests the Energy class
+ */
+<span class="fc" id="L12">public class EnergyTest {</span>
+
+    private Energy energy;
+
+    /**
+     * Initialises a new Energy object before each test is executed.
+     * This ensures that each test starts with a fresh instance of Energy,
+     * with the energy level set to its initial value (10).
+     */
+    @Before
+    public void initialise() {
+<span class="fc" id="L23">        energy = new Energy();</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * Tests if initial energy is 10.
+     */
+    @Test
+    public void testInitialEnergy() {
+<span class="fc" id="L31">        assertEquals((Integer) 10, energy.getEnergy());</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     * Tests decreaseEnergy method to ensure it decreases the energy level correctly.
+     * Checks the energy level decreases by the specified amount and doesn't fall below zero.
+     */
+    @Test
+    public void testDecreaseEnergy() {
+<span class="fc" id="L40">        energy.decreaseEnergy(4);</span>
+<span class="fc" id="L41">        assertEquals((Integer) 6, energy.getEnergy());</span>
+<span class="fc" id="L42">        energy.decreaseEnergy(7);</span>
+<span class="fc" id="L43">        assertEquals((Integer) 0, energy.getEnergy());</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * Tests increaseEnergy method to ensure it correctly increases the energy level.
+     * Checks the energy level increases by the specified amount and doesn't exceed the max cap of 10.
+     */
+    @Test
+    public void testIncreaseEnergy() {
+<span class="fc" id="L52">        energy.decreaseEnergy(4); // Decreases energy to allow for an increase</span>
+<span class="fc" id="L53">        energy.increaseEnergy(2);</span>
+<span class="fc" id="L54">        assertEquals((Integer) 8, energy.getEnergy());</span>
+<span class="fc" id="L55">        energy.increaseEnergy(2);</span>
+<span class="fc" id="L56">        assertEquals((Integer) 10, energy.getEnergy());</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Tests getTextureName method to ensure it returns the correct texture path based on the current energy level.
+     * Checks the texture name updates correctly as energy level changes.
+     */
+    @Test
+    public void testUpdateTextureName() {
+<span class="fc" id="L65">        assertEquals(&quot;energy/energy_10.png&quot;, energy.getTextureName());</span>
+<span class="fc" id="L66">        energy.decreaseEnergy(4);</span>
+<span class="fc" id="L67">        assertEquals(&quot;energy/energy_6.png&quot;, energy.getTextureName());</span>
+<span class="fc" id="L68">        energy.increaseEnergy(2);</span>
+<span class="fc" id="L69">        assertEquals(&quot;energy/energy_8.png&quot;, energy.getTextureName());</span>
+<span class="fc" id="L70">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
